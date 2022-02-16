@@ -1,6 +1,7 @@
 const fs = require('firebase-admin');
 
 const db = fs.firestore(); 
+const booksCollection = 'books';
 
 // @desc    Get all bootcamps
 // @route   Get /books
@@ -14,7 +15,7 @@ exports.getBooks = async (req, res, next) => {
     // Create query string
     let queryStr = JSON.stringify(reqQuery);
     
-    query = db.collection('books');
+    query = db.collection(booksCollection);
     
     // Select fields
     if (select) {
@@ -50,7 +51,7 @@ exports.getBooks = async (req, res, next) => {
 // @access  Public
 exports.getBook = async (req, res, next) => {
     const id = req.params.id;
-    const bookRef = db.collection('books').doc(id);
+    const bookRef = db.collection(booksCollection).doc(id);
     const book = await bookRef.get();
 
     if (!book) {
@@ -73,7 +74,7 @@ exports.getBook = async (req, res, next) => {
 // @access  Public
 exports.createBook = async (req, res, next) => {
     try {
-        const book = await db.collection('books').add(req.body);
+        const book = await db.collection(booksCollection).add(req.body);
   
         res.status(201).json({
           success: true,
@@ -95,7 +96,7 @@ exports.createBook = async (req, res, next) => {
 // @access  Public
 exports.deleteBook = async (req, res, next) => {
     const id = req.params.id;
-    const bookRef = db.collection('books').doc(id);
+    const bookRef = db.collection(booksCollection).doc(id);
 
     try {
         await bookRef.delete();
