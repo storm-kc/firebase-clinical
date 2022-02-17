@@ -1,12 +1,12 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
+  "name": "books",
+  "description": "Cloud Functions for Books example",
   "scripts": {
     "lint": "eslint .",
-    "serve": "firebase emulators:start --only functions",
+    "serve": "firebase emulators:start --only books",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only books",
     "logs": "firebase functions:log"
   },
   "engines": {
