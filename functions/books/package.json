@@ -1,6 +1,6 @@
 {
   "name": "books",
-  "description": "Cloud Functions fo Books example",
+  "description": "Cloud Functions for Books example",
   "scripts": {
     "lint": "eslint .",
     "serve": "firebase emulators:start --only books",
