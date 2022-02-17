@@ -1,0 +1,25 @@
+{
+    "name": "example",
+    "dob" : "12/17/01",
+    "assignedSex" : "M",
+    "height" : 67,
+    "weight" : 165,
+    "address" : "1234 example ave",
+    "phone" : 1224567890,
+    "email" : "example@test.com",
+    "deceased" : false,
+    "preExistingCondition" : [
+        "abcde12345"
+    ],
+    "network" : "abdcde12345",
+    "records" : [
+        "abcde12345"
+    ],
+    "emergencyContact" : {
+        "name": "example parent",
+        "phone": 1235558723,
+        "email": "eample2@test.com",
+        "address": "1234 example drive",
+        "relationship": "parent"
+    }
+}
