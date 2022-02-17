@@ -1,5 +1,5 @@
 const express = require("express");
-const { createBook, getBooks, getBook, deleteBook } = require('./books.controllers');
+const { createPatient, getPatient, getPatients, deletePatient } = require('./patients.controllers');
 
 const router = express.Router();
 
@@ -9,11 +9,11 @@ const db = fs.firestore();
 
 
 router.route("/")
-    .get(getBooks)
-    .post(createBook)
+    .get(getPatients)
+    .post(createPatient)
 
 router.route("/:id")
-    .get(getBook)
-    .delete(deleteBook)
+    .get(getPatient)
+    .delete(deletePatient)
 
 module.exports = router;
