@@ -89,10 +89,34 @@ exports.createPatient = async (req, res, next) => {
         res.status(404).json({ 
             success: false, 
             data: {},
-            message: `Failed to Create new Patient record ${err}`
+            message: `Failed to Create new Patient record`
         }); 
     }
   };
+
+    // @desc    Updates patient values
+    // @route   Put /patient/:id
+    // @access  Public
+    exports.updatePatient = async (req, res, next) => {
+        try {
+        const id = req.params.id;
+        const patientInfo = req.body
+        
+        const patient = await db.collection(patientsCollections).doc(id).update(JSON.parse(JSON.stringify(patientInfo)));
+  
+        res.status(201).json({
+          success: true,
+          data: patient,
+        });
+    }
+    catch(err){
+        res.status(404).json({ 
+            success: false, 
+            data: {},
+            message: `Failed to update Patient record ${id}`
+        }); 
+    }
+    }
 
 
 // @desc    Delete single patient
