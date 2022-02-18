@@ -3,6 +3,32 @@ const fs = require('firebase-admin');
 const db = fs.firestore();
 const cliniciansCollection = 'clinicians';
 
+
+const addPatientToClinician = async (patient_ID, clinician_ID) => {
+  
+  try {
+    
+    const clinicianRef = db.collection(cliniciansCollection).doc(clinician_ID);
+    const clinician = await clinicianRef.get();
+
+  if (clinician && clinician.data().patients) {
+      if(clinician.data().patients.includes(patient_ID)) {
+        return {code: 400, message: "Patient already exists"}
+      }
+
+      var patientsArray = clinician.data().patients;
+      patientsArray.push(patient_ID);
+      await clinicianRef.update(JSON.parse(JSON.stringify({patients: patientsArray})));
+      return {code: 200, message: "Patient was added to Clinician"}
+  } else {
+      return {code: 404, message: "Clinician was not found"}
+  }
+  } catch (err) {
+    return {code: 404, message: "Clincian was not found"}
+  }
+  
+}
+
 exports.createClinician = async (req, res, next) => {
   const clinicianData = req.body;
   const clinician = await db.collection(cliniciansCollection).add(clinicianData);
@@ -105,3 +131,21 @@ exports.updateClinician = async (req, res, next) => {
     });
   }
 };
+
+exports.updateClinicianWithPatient = async (req, res, next) => {
+  if(req.body.patient_ID && req.params.id){
+    const clinicianId = req.params.id
+    const patientId = req.body.patient_ID
+    const response = await addPatientToClinician(patientId, clinicianId)
+
+    res.status(response.code).json({
+      success: response.code === 200 ? true : false,
+      message: response.message
+    })
+  } else {
+    res.status(400).json({
+      success: false,
+      message: "invalid body needs value: patient_ID"
+    })
+  }
+}
