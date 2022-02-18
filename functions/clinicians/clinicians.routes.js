@@ -1,5 +1,5 @@
 const express = require('express');
-const { createClinician, deleteClinician, getClinician, getClinicians, updateClinician, updateClinicianWithPatient } = require('./clinicians.controllers');
+const { createClinician, deleteClinician, getClinician, getClinicians, updateClinician, updateClinicianWithPatient, removePatientFromClinician } = require('./clinicians.controllers');
 const router = express.Router();
 
 router.route('/')
@@ -13,5 +13,8 @@ router.route('/:id')
 
 router.route('/addPatient/:id')
   .put(updateClinicianWithPatient);
-  
+
+router.route('/removePatient/:id')
+  .put(removePatientFromClinician);
+
 module.exports = router;
