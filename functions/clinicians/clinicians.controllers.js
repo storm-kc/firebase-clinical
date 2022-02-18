@@ -13,6 +13,27 @@ exports.createClinician = async (req, res, next) => {
   });
 };
 
+exports.deleteClinician = async (req, res, next) => {
+  const id = req.params.id;
+  const clinicianRef = db.collection(cliniciansCollection).doc(id);
+
+  try {
+    await clinicianRef.delete();
+
+    res.status(200).json({
+      success: true,
+      data: {},
+    });
+  }
+  catch (err) {
+    res.status(404).json({
+      success: false,
+      data: {},
+      message: `Failed to delete clinician with id ${id}`,
+    });
+  }
+};
+
 exports.getClinician = async (req, res, next) => {
   const id = req.params.id;
   const clinicianRef = db.collection(cliniciansCollection).doc(id);
@@ -63,4 +84,24 @@ exports.getClinicians = async (req, res, next) => {
     count: clinicians.count,
     data: clinicians,
   });
+};
+
+exports.updateClinician = async (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+  const clinicianRef = db.collection(cliniciansCollection).doc(id);
+
+  try {
+    const clinician = await clinicianRef.update(data);
+
+    res.status(200).json({
+      success: true,
+      data: clinician,
+    });
+  }
+  catch (err) {
+    return res.status(404).json({
+      success: false,
+    });
+  }
 };
