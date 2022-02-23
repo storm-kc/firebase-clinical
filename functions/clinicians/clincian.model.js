@@ -1,4 +1,22 @@
 class Clinician {
+  
+  // https://express-validator.github.io/docs/schema-validation.html
+  static schema = {
+    name: {
+      isLength: {
+        options: { min: 1 },
+      }
+    },
+    age: {
+      isInt: true,
+      toInt: true,
+    },
+    patients: {},
+    appointments: {},
+    networks: {},
+    practice: {},
+  }
+
   constructor(name, age, patients, appointments, networks, practice) {
     this.name = name;
     this.age = age;
