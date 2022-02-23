@@ -7,7 +7,7 @@ describe("GET /clinicians", function () {
     it("returns list of clinicians", function () {
       
     //specify the url to be intercepted
-    nock(`http://localhost:5000`)
+    nock(`http://localhost:${process.env.port}`)
     //define the method to be intercepted
     .get('/clinicians/')
     //respond with a OK and the specified JSON response
