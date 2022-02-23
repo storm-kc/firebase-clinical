@@ -31,7 +31,7 @@ exports.getPatients = async (req, res, next) => {
     }
 
     // Executing query
-    const snapshot = await query.get(JSON.parse(queryStr));
+    const snapshot = await query.get(reqQuery);
 
     const patients = snapshot.docs.map(patient => (
         {
