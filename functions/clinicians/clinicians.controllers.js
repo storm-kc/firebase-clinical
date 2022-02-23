@@ -129,7 +129,8 @@ exports.getClinicians = async (req, res, next) => {
     query = query.limit(queryLimit);
   }
 
-  const snapshot = await query.get(JSON.parse(queryStr));
+  const snapshot = await query.get(reqQuery);
+
   const clinicians = snapshot.docs.map((clinician) => (
     {
       id: clinician.id,
