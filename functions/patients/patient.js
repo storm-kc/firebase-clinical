@@ -1,6 +1,38 @@
 const ep = require('./patients.json')
 
 class Patient {
+
+    static schema = {
+        name: {},
+        dob: {
+            isDate: true,
+        },
+        assignedSex: {
+            isIn: {
+                options: ['M', 'F'],
+            }
+        },
+        height: {},
+        weight: {},
+        address: {},
+        phone: {},
+        email: {
+            isEmail: true,
+            normalizeEmail: true,
+        },
+        deceased: {
+            isBoolean: true,
+            toBoolean: true,
+        },
+        preExistingCondition: {},
+        network: {},
+        records: {},
+        'emergencyContact.email': {
+            isEmail: true,
+            normalizeEmail: true,
+        },
+    }
+
     constructor(name, dob, assignedSex, height, weight, address, phone, email, deceased,preExistingCondition, network, records, emergencyContact ){
         this.name = name;
         this.dob = dob;
